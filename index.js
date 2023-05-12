@@ -1,6 +1,7 @@
 const app = require('express')()
 const cors = require('cors')
 
+app.use(cors())
 
 app.get('/factorial', (req, res) =>{
     let value = req.query.value
