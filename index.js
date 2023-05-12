@@ -4,22 +4,37 @@ const cors = require('cors')
 app.use(cors())
 
 
+
 app.get('/factorial/:value', (req, res) =>{
     let value = parseInt(req.params.value)
-  
-    res.status(200).send({
-        'result': factorial(value).toString()
-    })
 
+    if(isNaN(value)){
+        res.status(422).send({
+            'error': 'Invalid number input.'
+        })
+    }
+    else{
+  
+        res.status(200).send({
+            'result': factorial(value).toString()
+        })
+    }
 })
 
 app.get('/superfactorial/:value', (req, res) => {
     let value = parseInt(req.params.value)
 
-    res.status(200).send({
-        'result': superFactorial(value).toString()
-    })
+    if(isNaN(value)){
+        res.status(422).send({
+            'error': 'Invalid number input.'
+        })
+    }
+    else{
 
+        res.status(200).send({
+            'result': superFactorial(value).toString()
+        })
+    }
 })
 
 
