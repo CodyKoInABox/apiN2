@@ -4,8 +4,8 @@ const cors = require('cors')
 app.use(cors())
 
 
-app.get('/factorial', (req, res) =>{
-    let value = parseInt(req.query.value)
+app.get('/factorial/:value', (req, res) =>{
+    let value = parseInt(req.params.value)
   
     res.status(200).send({
         'result': factorial(value).toString()
@@ -13,9 +13,8 @@ app.get('/factorial', (req, res) =>{
 
 })
 
-
-app.get('/superfactorial', (req, res) => {
-    let value = parseInt(req.query.value)
+app.get('/superfactorial/:value', (req, res) => {
+    let value = parseInt(req.params.value)
 
     res.status(200).send({
         'result': superFactorial(value).toString()
