@@ -5,7 +5,7 @@ app.use(cors())
 
 app.get('/factorial', (req, res) =>{
     let value = req.query.value
-    let result = 1;
+    let result = 1
 
     for(let i = 0; i < value; i++){
         result = result * (value - i)
@@ -14,6 +14,15 @@ app.get('/factorial', (req, res) =>{
     res.status(200).send({
         'result': result.toString()
     })
+})
+
+app.get('/superfactorial', (req, res) => {
+    let value = req.query.value
+    let result = 1
+
+    for(let i = 0; i < value; i++){
+        result = result * (value - i)
+    }
 })
 
 app.listen(8080, () =>{
