@@ -19,7 +19,10 @@ app.get('/factorial/:value', async (req, res) =>{
 
         let result = await redisGet('Factorial', value.toString())
         
-    
+        if(result == null){
+            result = factorial(value)
+            await redisSet('Factorial', value, result)
+        }
 
         console.log(result)
 
