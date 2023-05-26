@@ -1,5 +1,7 @@
 
 function factorial(){
+    document.getElementById('loading').style.display = 'block'
+
     let input = document.getElementById('input').value
 
     let url = window.location.origin + '/factorial/' + input
@@ -7,6 +9,7 @@ function factorial(){
     fetch(url)
     .then(response => (response).json())
     .then(data => {
+        document.getElementById('loading').style.display = 'none'
         document.getElementById('result').innerHTML = 'Factorial of ' + input + ' = ' + "<span class='resultBold'>" + data.result + '</span>'
         if(data.wasCached){
             document.getElementById('wasCached').innerText = 'Was cached'
@@ -18,6 +21,8 @@ function factorial(){
 }
 
 function superFactorial(){
+    document.getElementById('loading').style.display = 'block'
+
     let input = document.getElementById('input').value
 
     let url = window.location.origin + '/superFactorial/' + input
@@ -25,6 +30,7 @@ function superFactorial(){
     fetch(url)
     .then(response => (response).json())
     .then(data => {
+        document.getElementById('loading').style.display = 'none'
         document.getElementById('result').innerHTML = 'SuperFactorial of ' + input + ' = ' + "<span class='resultBold'>" + data.result + '</span>'
         if(data.wasCached){
             document.getElementById('wasCached').innerText = 'Was cached'
