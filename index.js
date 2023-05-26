@@ -19,7 +19,7 @@ app.get('/', (req, res) =>{
 app.get('/factorial/:value', async (req, res) =>{
     let value = parseInt(req.params.value)
 
-    if(isNaN(value)){
+    if(isNaN(value) || value <= 0){
         res.status(422).send({
             'error': 'Invalid number input.'
         })
@@ -46,7 +46,7 @@ app.get('/factorial/:value', async (req, res) =>{
 app.get('/superfactorial/:value', async (req, res) => {
     let value = parseInt(req.params.value)
 
-    if(isNaN(value)){
+    if(isNaN(value) || value <= 0){
         res.status(422).send({
             'error': 'Invalid number input.'
         })
