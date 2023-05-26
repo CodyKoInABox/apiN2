@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+//THIS FILE IS FOR TESTING ONLY!
+
 async function redisSet(key, field, value){
 
     const redis = require('redis')

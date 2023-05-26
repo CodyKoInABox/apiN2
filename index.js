@@ -16,27 +16,23 @@ app.get('/factorial/:value', async (req, res) =>{
     }
     else{
   
-
         let result = await redisGet('Factorial', value.toString())
+        let wasCached = true
         
         if(result == null){
             result = factorial(value)
             await redisSet('Factorial', value, result)
+            wasCached = false
         }
 
-        console.log(result)
-
-        //if(result = null){
-        //    result = factorial(value).toString()
-        //}
-
         res.status(200).send({
-            'result': result
+            'result': result,
+            'wasCached': wasCached
         })
     }
 })
 
-app.get('/superfactorial/:value', (req, res) => {
+app.get('/superfactorial/:value', async (req, res) => {
     let value = parseInt(req.params.value)
 
     if(isNaN(value)){
@@ -45,9 +41,19 @@ app.get('/superfactorial/:value', (req, res) => {
         })
     }
     else{
-
+        
+        let result = await redisGet('Superfactorial', value.toString())
+        let wasCached = true
+        
+        if(result == null){
+            result = factorial(value)
+            await redisSet('Superfactorial', value, result)
+            wasCached = false
+        }
+        
         res.status(200).send({
-            'result': superFactorial(value).toString()
+            'result': superFactorial(value).toString(),
+            'wasCached': wasCached
         })
     }
 })
