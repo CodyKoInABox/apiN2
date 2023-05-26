@@ -1,11 +1,12 @@
 const app = require('express')()
 const cors = require('cors')
+require('dotenv').config()
 
 app.use(cors())
 
 
 
-app.get('/factorial/:value', (req, res) =>{
+app.get('/factorial/:value', async (req, res) =>{
     let value = parseInt(req.params.value)
 
     if(isNaN(value)){
@@ -15,13 +16,23 @@ app.get('/factorial/:value', (req, res) =>{
     }
     else{
   
+        let result = await redisGet('Factorial', value.toString())
+        let wasCached = true
+        
+        if(result == null){
+            result = factorial(value)
+            await redisSet('Factorial', value, result)
+            wasCached = false
+        }
+
         res.status(200).send({
-            'result': factorial(value).toString()
+            'result': result,
+            'wasCached': wasCached
         })
     }
 })
 
-app.get('/superfactorial/:value', (req, res) => {
+app.get('/superfactorial/:value', async (req, res) => {
     let value = parseInt(req.params.value)
 
     if(isNaN(value)){
@@ -30,9 +41,19 @@ app.get('/superfactorial/:value', (req, res) => {
         })
     }
     else{
-
+        
+        let result = await redisGet('Superfactorial', value.toString())
+        let wasCached = true
+        
+        if(result == null){
+            result = factorial(value)
+            await redisSet('Superfactorial', value, result)
+            wasCached = false
+        }
+        
         res.status(200).send({
-            'result': superFactorial(value).toString()
+            'result': superFactorial(value).toString(),
+            'wasCached': wasCached
         })
     }
 })
@@ -63,4 +84,41 @@ function superFactorial(x){
     else{
         return x * factorial(x-1) * superFactorial(x-1)
     }
+}
+
+
+//set a value in redis
+async function redisSet(key, field, value){
+
+    let redis = require('redis')
+
+    let client = redis.createClient({
+        url: process.env.REDIS_URL
+    })
+
+    client.connect()
+
+    let result = await client.hSet(key, field, value)
+
+    client.disconnect()
+
+    return result
+}
+
+//get a value in redis
+async function redisGet(key, field){
+
+    let redis = require('redis')
+
+    let client = redis.createClient({
+        url: process.env.REDIS_URL
+    })
+
+    client.connect()
+
+    let result = await client.hGet(key, field)
+
+    client.disconnect()
+
+    return result
 }
