@@ -1,11 +1,21 @@
 const app = require('express')()
+const express = require('express')
 const cors = require('cors')
+const path = require('path')
 require('dotenv').config()
 
 app.use(cors())
 
 
+app.use(express.static(__dirname + '/website/'));
 
+
+//endpoint for web page
+app.get('/', (req, res) =>{
+    res.sendFile()
+})
+
+//endpoint for factorial
 app.get('/factorial/:value', async (req, res) =>{
     let value = parseInt(req.params.value)
 
@@ -32,6 +42,7 @@ app.get('/factorial/:value', async (req, res) =>{
     }
 })
 
+//endpoint for superfactorial
 app.get('/superfactorial/:value', async (req, res) => {
     let value = parseInt(req.params.value)
 

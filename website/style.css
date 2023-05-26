@@ -1,0 +1,51 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    font-family: Arial;
+}
+.title{
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+.subTitle{
+    font-size: 1.2rem;
+    margin-top: 0px;
+}
+.form{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    gap: 50px
+}
+.button{
+    width: 120px;
+}
+.button:hover{
+    cursor: pointer;
+}
+#input{
+    text-align: center;
+    font-size: larger;
+}
+.inputTitle{
+    margin: 0px;
+    margin-bottom: 10px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#result{
+    font-weight: normal;
+}
+.resultBold{
+    font-weight: bolder;
+}
