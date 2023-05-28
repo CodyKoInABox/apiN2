@@ -2,14 +2,16 @@
 
 https://factorialapi.onrender.com/
 
-# API Documentation (made with CHAT GPT I'll write one myself later)
+# API Documentation 
+#### (made with help from CHAT GPT, I'll write one myself later)
 
-This is a simple API that calculates factorial and superfactorial of a given number. The API is hosted on `http://localhost:8080` and has the following endpoints:
+This is a simple API that calculates factorial and superfactorial of a given number. The API is hosted on `https://factorialapi.onrender.com/` or locally on `http://localhost:8080/` and has the following endpoints:
 
 ## Endpoint for web page
 
 - **GET /**
 - `https://factorialapi.onrender.com/`
+- `http://localhost:8080/`
   
   Returns the web page.
 
@@ -17,6 +19,7 @@ This is a simple API that calculates factorial and superfactorial of a given num
 
 - **GET /factorial/:value**
 - `https://factorialapi.onrender.com/factorial/:value`
+- `http://localhost:8080/factorial/:value`
 
   Calculates the factorial of the specified `value`.
   
@@ -31,6 +34,7 @@ This is a simple API that calculates factorial and superfactorial of a given num
 
 - **GET /superfactorial/:value**
 - `https://factorialapi.onrender.com/superfactorial/:value`
+- `http://localhost:8080/superfactorial/:value`
 
   Calculates the superfactorial of the specified `value`.
   
@@ -43,11 +47,12 @@ This is a simple API that calculates factorial and superfactorial of a given num
 
 Note: If the `value` is not a valid positive integer, an error response with status code 422 will be returned.
 
-## Usage on localhost
+## Running the API locally
 
 1. Install the required dependencies using `npm install`.
-2. Set up a Redis server and provide the `REDIS_URL` in the `.env` file.
-3. Run the API using `node app.js`.
+2. Set up a Redis server and provide the `REDIS_URL` in a `.env` file.
+3. Run the API using `node .`.
 4. Access the endpoints using an HTTP client.
 
-Make sure to replace `REDIS_URL` with the actual URL of your Redis server.
+- Make sure to **create** a **.env** file with a **variable** called `REDIS_URL` whose value should be the **URL** of your OWN **Redis Database**.  
+- You can create a **FREE** Redis Database at `https://app.redislabs.com/`
